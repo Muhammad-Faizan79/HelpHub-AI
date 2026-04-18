@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HelpHub AI - Leaderboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style6.css">
+<base target="_blank">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <div class="logo-icon">H</div>
+            <span>HelpHub AI</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="./profile.html">Dashboard</a></li>
+            <li><a href="./explore.html">Explore</a></li>
+            <li><a href="./leader.html" class="active">Leaderboard</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero animate-in">
+        <div class="hero-label">Leaderboard</div>
+        <h1 class="hero-title">Recognize the people who keep the community moving.</h1>
+        <p class="hero-desc">Trust score, contribution count, and badges create visible momentum for reliable helpers.</p>
+    </section>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Left: Rankings -->
+        <div class="card animate-in delay-1">
+            <div class="card-label">Top Helpers</div>
+            <h2 class="card-title">Rankings</h2>
+            
+            <div class="ranking-list">
+                <div class="ranking-item">
+                    <div class="avatar avatar-dark">HA</div>
+                    <div class="ranking-info">
+                        <div class="ranking-name">#2 Hassan Ali</div>
+                        <div class="ranking-skills">JavaScript, React, Git/GitHub</div>
+                    </div>
+                    <div class="ranking-stats">
+                        <div class="trust-score">88%</div>
+                        <div class="contributions">24 contributions</div>
+                    </div>
+                </div>
+
+                <div class="ranking-item">
+                    <div class="avatar avatar-orange">SN</div>
+                    <div class="ranking-info">
+                        <div class="ranking-name">#3 Sara Noor</div>
+                        <div class="ranking-skills">Python, Data Analysis</div>
+                    </div>
+                    <div class="ranking-stats">
+                        <div class="trust-score">74%</div>
+                        <div class="contributions">11 contributions</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Badge System -->
+        <div class="card animate-in delay-2">
+            <div class="card-label">Badge System</div>
+            <h2 class="card-title">Trust and achievement</h2>
+            
+            <div class="badge-list">
+                <div class="badge-item">
+                    <div class="badge-name">Hassan Ali</div>
+                    <div class="badge-tags">Code Rescuer • Bug Hunter</div>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: 88%"></div>
+                    </div>
+                </div>
+
+                <div class="badge-item">
+                    <div class="badge-name">Sara Noor</div>
+                    <div class="badge-tags">Community Voice</div>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: 74%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Animate progress bars on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bars = entry.target.querySelectorAll('.progress-bar');
+                    bars.forEach(bar => {
+                        const width = bar.style.width;
+                        bar.style.width = '0';
+                        setTimeout(() => {
+                            bar.style.width = width;
+                        }, 100);
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.badge-list').forEach(list => {
+            observer.observe(list);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HelpHub AI - Notifications</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style7.css">
+<base target="_blank">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <div class="logo-icon">H</div>
+            <span>HelpHub AI</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="./profile.html">Dashboard</a></li>
+            <li><a href="./explore.html">Explore</a></li>
+            <li><a href="./notification.html" class="active">Notifications</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero animate-in">
+        <div class="hero-label">Notifications</div>
+        <h1 class="hero-title">Stay updated on requests, helpers, and trust signals.</h1>
+    </section>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="card animate-in delay-1">
+            <div class="card-label">Live Updates</div>
+            <h2 class="card-title">Notification feed</h2>
+            
+            <div class="notification-list">
+                <div class="notification-item" onclick="toggleRead(this)">
+                    <div class="notification-content">
+                        <div class="notification-title">"Need help" was marked as solved</div>
+                        <div class="notification-meta">Status <span>•</span> Just now</div>
+                    </div>
+                    <span class="notification-badge">Unread</span>
+                </div>
+
+                <div class="notification-item" onclick="toggleRead(this)">
+                    <div class="notification-content">
+                        <div class="notification-title">Ayesha Khan offered help on "Need help"</div>
+                        <div class="notification-meta">Match <span>•</span> Just now</div>
+                    </div>
+                    <span class="notification-badge">Unread</span>
+                </div>
+
+                <div class="notification-item" onclick="toggleRead(this)">
+                    <div class="notification-content">
+                        <div class="notification-title">Your request "Need help" is now live in the community feed</div>
+                        <div class="notification-meta">Request <span>•</span> Just now</div>
+                    </div>
+                    <span class="notification-badge">Unread</span>
+                </div>
+
+                <div class="notification-item" onclick="toggleRead(this)">
+                    <div class="notification-content">
+                        <div class="notification-title">"Need help making my portfolio responsive before demo day" was marked as solved</div>
+                        <div class="notification-meta">Status <span>•</span> Just now</div>
+                    </div>
+                    <span class="notification-badge">Unread</span>
+                </div>
+
+                <div class="notification-item" onclick="toggleRead(this)">
+                    <div class="notification-content">
+                        <div class="notification-title">"Need help making my portfolio responsive before demo day" was marked as solved</div>
+                        <div class="notification-meta">Status <span>•</span> Just now</div>
+                    </div>
+                    <span class="notification-badge">Unread</span>
+                </div>
+
+                <div class="notification-item" onclick="toggleRead(this)">
+                    <div class="notification-content">
+                        <div class="notification-title">"Need help making my portfolio responsive before demo day" was marked as solved</div>
+                        <div class="notification-meta">Status <span>•</span> Just now</div>
+                    </div>
+                    <span class="notification-badge">Unread</span>
+                </div>
+
+                <div class="notification-item" onclick="toggleRead(this)">
+                    <div class="notification-content">
+                        <div class="notification-title">New helper matched to your responsive portfolio request</div>
+                        <div class="notification-meta">Match <span>•</span> 12 min ago</div>
+                    </div>
+                    <span class="notification-badge">Unread</span>
+                </div>
+
+                <div class="notification-item" onclick="toggleRead(this)">
+                    <div class="notification-content">
+                        <div class="notification-title">Your trust score increased after a solved request</div>
+                        <div class="notification-meta">Reputation <span>•</span> 1 hr ago</div>
+                    </div>
+                    <span class="notification-badge">Unread</span>
+                </div>
+
+                <div class="notification-item read" onclick="toggleRead(this)">
+                    <div class="notification-content">
+                        <div class="notification-title">AI Center detected rising demand for interview prep</div>
+                        <div class="notification-meta">Insight <span>•</span> Today</div>
+                    </div>
+                    <span class="notification-badge read">Read</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle read/unread status
+        function toggleRead(element) {
+            const badge = element.querySelector('.notification-badge');
+            if (badge.classList.contains('read')) {
+                badge.classList.remove('read');
+                badge.textContent = 'Unread';
+                element.classList.remove('read');
+            } else {
+                badge.classList.add('read');
+                badge.textContent = 'Read';
+                element.classList.add('read');
+            }
+            
+            // Save to localStorage
+            saveNotifications();
+        }
+
+        // Save notification states
+        function saveNotifications() {
+            const items = document.querySelectorAll('.notification-item');
+            const states = [];
+            items.forEach((item, index) => {
+                states.push({
+                    index: index,
+                    read: item.classList.contains('read')
+                });
+            });
+            localStorage.setItem('helphub_notifications', JSON.stringify(states));
+        }
+
+        // Load notification states
+        function loadNotifications() {
+            const saved = localStorage.getItem('helphub_notifications');
+            if (saved) {
+                const states = JSON.parse(saved);
+                const items = document.querySelectorAll('.notification-item');
+                states.forEach(state => {
+                    if (items[state.index]) {
+                        const badge = items[state.index].querySelector('.notification-badge');
+                        if (state.read) {
+                            items[state.index].classList.add('read');
+                            badge.classList.add('read');
+                            badge.textContent = 'Read';
+                        }
+                    }
+                });
+            }
+        }
+
+        // Load on start
+        loadNotifications();
+    </script>
+</body>
+</html>

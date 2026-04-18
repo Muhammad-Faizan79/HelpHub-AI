@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HelpHub AI - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style3.css">
+<base target="_blank">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <div class="logo-icon">H</div>
+            <span>HelpHub AI</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./explore.html">Explore</a></li>
+            <li><a href="./leader.html">Leaderboard</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-container">
+        <div class="info-card animate-in">
+            <div class="info-label">Community Access</div>
+            <h1 class="info-title">Enter the support network.</h1>
+            <p class="info-desc">Choose a demo identity, set your role, and jump into a multi-page product flow designed for asking, offering, and tracking help with a premium interface.</p>
+            <ul class="info-list">
+                <li><span class="bullet"></span>Role-based entry for Need Help, Can Help, or Both</li>
+                <li><span class="bullet"></span>Direct path into dashboard, requests, AI Center, and community feed</li>
+                <li><span class="bullet"></span>Persistent demo session powered by LocalStorage</li>
+            </ul>
+        </div>
+
+        <div class="form-card animate-in delay-1">
+            <div class="form-label">Login / Signup</div>
+            <h2 class="form-title">Authenticate your community profile</h2>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="user">Select demo user</label>
+                    <select class="form-control" id="user" name="user">
+                        <option value="ayesha">Ayesha Khan</option>
+                        <option value="sara">Sara Noor</option>
+                        <option value="ahmed">Ahmed Ali</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="role">Role selection</label>
+                    <select class="form-control" id="role" name="role">
+                        <option value="both">Both</option>
+                        <option value="need-help">Need Help</option>
+                        <option value="can-help">Can Help</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" value="community@helphub.ai" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" value="password123" readonly>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit">Continue to dashboard</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const user = document.getElementById('user').value;
+            const role = document.getElementById('role').value;
+            const email = document.getElementById('email').value;
+            
+            localStorage.setItem('helphub_user', user);
+            localStorage.setItem('helphub_role', role);
+            localStorage.setItem('helphub_email', email);
+            localStorage.setItem('helphub_logged_in', 'true');
+            
+            alert('Login successful! Data saved to LocalStorage.\n\nUser: ' + user + '\nRole: ' + role);
+        });
+
+        window.addEventListener('load', function() {
+            const savedUser = localStorage.getItem('helphub_user');
+            const savedRole = localStorage.getItem('helphub_role');
+            if (savedUser) document.getElementById('user').value = savedUser;
+            if (savedRole) document.getElementById('role').value = savedRole;
+        });
+    </script>
+</body>
+</html>

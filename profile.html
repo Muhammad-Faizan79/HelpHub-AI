@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HelpHub AI - Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style5.css">
+<base target="_blank">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <div class="logo-icon">H</div>
+            <span>HelpHub AI</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="./leader.html">Dashboard</a></li>
+            <li><a href="./leader.html">Onboarding</a></li>
+            <li><a href="#" class="active">Profile</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero animate-in">
+        <div class="hero-label">Profile</div>
+        <h1 class="hero-title">Ayesha Khan</h1>
+        <p class="hero-meta">Both • Karachi</p>
+    </section>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Left: Public Profile -->
+        <div class="card animate-in delay-1">
+            <div class="card-label">Public Profile</div>
+            <h2 class="card-title">Skills and reputation</h2>
+            
+            <div class="stat-row">
+                <span class="stat-label">Trust score</span>
+                <span class="stat-value">100%</span>
+            </div>
+            
+            <div class="stat-row">
+                <span class="stat-label">Contributions</span>
+                <span class="stat-value">35</span>
+            </div>
+
+            <div class="tag-section">
+                <div class="tag-label">Skills</div>
+                <div class="tag-list">
+                    <span class="tag">Figma</span>
+                    <span class="tag">UI/UX</span>
+                    <span class="tag">HTML/CSS</span>
+                    <span class="tag">Career Guidance</span>
+                </div>
+            </div>
+
+            <div class="tag-section">
+                <div class="tag-label">Badges</div>
+                <div class="tag-list">
+                    <span class="tag">Design Ally</span>
+                    <span class="tag">Fast Responder</span>
+                    <span class="tag">Top Mentor</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Edit Profile -->
+        <div class="card animate-in delay-2">
+            <div class="card-label">Edit Profile</div>
+            <h2 class="card-title">Update your<br>identity</h2>
+            
+            <form id="profileForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" value="Ayesha Khan">
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" class="form-control" id="location" value="Karachi">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="skills">Skills</label>
+                    <input type="text" class="form-control" id="skills" value="Figma, UI/UX, HTML/CSS, Career Guidance">
+                </div>
+
+                <div class="form-group">
+                    <label for="interests">Interests</label>
+                    <input type="text" class="form-control" id="interests" value="Hackathons, UI/UX, Community Building">
+                </div>
+
+                <button type="submit" class="btn-save">Save profile</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Load profile from localStorage
+        function loadProfile() {
+            const saved = localStorage.getItem('helphub_profile');
+            if (saved) {
+                const profile = JSON.parse(saved);
+                document.getElementById('name').value = profile.name || 'Ayesha Khan';
+                document.getElementById('location').value = profile.location || 'Karachi';
+                document.getElementById('skills').value = profile.skills || 'Figma, UI/UX, HTML/CSS, Career Guidance';
+                document.getElementById('interests').value = profile.interests || 'Hackathons, UI/UX, Community Building';
+                
+                // Update hero
+                document.querySelector('.hero-title').textContent = profile.name || 'Ayesha Khan';
+                document.querySelector('.hero-meta').textContent = `Both • ${profile.location || 'Karachi'}`;
+            }
+        }
+
+        // Save profile
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const profile = {
+                name: document.getElementById('name').value,
+                location: document.getElementById('location').value,
+                skills: document.getElementById('skills').value,
+                interests: document.getElementById('interests').value
+            };
+            
+            localStorage.setItem('helphub_profile', JSON.stringify(profile));
+            
+            // Update hero
+            document.querySelector('.hero-title').textContent = profile.name;
+            document.querySelector('.hero-meta').textContent = `Both • ${profile.location}`;
+            
+            alert('Profile saved successfully!');
+        });
+
+        // Load on start
+        loadProfile();
+    </script>
+</body>
+</html>

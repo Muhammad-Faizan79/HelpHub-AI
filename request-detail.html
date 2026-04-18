@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HelpHub AI - Request Detail</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style10.css">
+<base target="_blank">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <div class="logo-icon">H</div>
+            <span>HelpHub AI</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="./profile.html">Dashboard</a></li>
+            <li><a href="./explore.html">Explore</a></li>
+            <li><a href="./message.html">Messages</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero animate-in">
+        <div class="hero-label">Request Detail</div>
+        <div class="hero-tags">
+            <span class="hero-tag career">Career</span>
+            <span class="hero-tag low">Low</span>
+            <span class="hero-tag solved">Solved</span>
+        </div>
+        <h1 class="hero-title">Need mock interview support for internship applications</h1>
+        <p class="hero-desc">Applying to frontend internships and need someone to practice behavioral and technical interview questions with me.</p>
+    </section>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Left Column -->
+        <div class="left-column">
+            <!-- AI Summary -->
+            <div class="card animate-in delay-1">
+                <div class="card-label">AI Summary</div>
+                <p class="ai-summary-text">Career coaching request focused on confidence-building, behavioral answers, and entry-level frontend interviews.</p>
+                <div class="tag-list">
+                    <span class="tag">Interview Prep</span>
+                    <span class="tag">Career</span>
+                    <span class="tag">Frontend</span>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="card animate-in delay-2">
+                <div class="card-label">Actions</div>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="offerHelp()">I can help</button>
+                    <button class="btn btn-outline" onclick="markSolved()">Mark as solved</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="right-column">
+            <!-- Requester -->
+            <div class="card animate-in delay-1">
+                <div class="card-label">Requester</div>
+                <div class="helper-item" style="background: white; border: none; padding: 0;">
+                    <div class="helper-avatar avatar-ayesha">SN</div>
+                    <div class="helper-info">
+                        <div class="helper-name">Sara Noor</div>
+                        <div class="helper-skills">Remote • 2 helpers interested</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Helpers -->
+            <div class="card animate-in delay-2">
+                <div class="card-label">Helpers</div>
+                <h3 class="card-title">People ready to support</h3>
+                
+                <div class="helper-list">
+                    <div class="helper-item">
+                        <div class="helper-avatar avatar-ayesha">AK</div>
+                        <div class="helper-info">
+                            <div class="helper-name">Ayesha Khan</div>
+                            <div class="helper-skills">Figma, UI/UX, HTML/CSS</div>
+                        </div>
+                        <span class="trust-badge">Trust 100%</span>
+                    </div>
+
+                    <div class="helper-item">
+                        <div class="helper-avatar avatar-hassan">HA</div>
+                        <div class="helper-info">
+                            <div class="helper-name">Hassan Ali</div>
+                            <div class="helper-skills">JavaScript, React, Git/GitHub</div>
+                        </div>
+                        <span class="trust-badge">Trust 88%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function offerHelp() {
+            const btn = document.querySelector('.btn-primary');
+            btn.textContent = 'Help offered!';
+            btn.style.background = 'var(--success)';
+            
+            // Save to localStorage
+            let helps = JSON.parse(localStorage.getItem('helphub_helps') || '[]');
+            helps.push({
+                request: 'Need mock interview support for internship applications',
+                date: new Date().toISOString()
+            });
+            localStorage.setItem('helphub_helps', JSON.stringify(helps));
+            
+            setTimeout(() => {
+                btn.textContent = 'I can help';
+                btn.style.background = '';
+            }, 2000);
+        }
+
+        function markSolved() {
+            const btn = document.querySelector('.btn-outline');
+            btn.textContent = 'Marked as solved!';
+            btn.style.borderColor = 'var(--success)';
+            btn.style.color = 'var(--success)';
+            
+            setTimeout(() => {
+                btn.textContent = 'Mark as solved';
+                btn.style.borderColor = '';
+                btn.style.color = '';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

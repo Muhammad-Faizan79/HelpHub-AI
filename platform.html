@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HelpHub AI - AI Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style2.css">
+<base target="_blank">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="#" class="logo">
+                <div class="logo-icon">H</div>
+                <span>HelpHub AI</span>
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="./profile.html">Dashboard</a></li>
+            <li><a href="./create-rec.html">Create Request</a></li>
+            <li><a href="./platform.html" class="active">AI Center</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-label">AI Center</div>
+        <h1 class="hero-title">See what the platform intelligence is noticing.</h1>
+        <p class="hero-desc">AI-like insights summarize demand trends, helper readiness, urgency signals, and request recommendations.</p>
+    </section>
+
+    <!-- Stats Grid -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-card animate-in">
+                <div class="stat-label">Trend Pulse</div>
+                <div class="stat-value">Web<br>Development</div>
+                <div class="stat-desc">Most common support area based on active community requests.</div>
+            </div>
+            <div class="stat-card animate-in delay-1">
+                <div class="stat-label">Urgency Watch</div>
+                <div class="stat-value stat-value-small">2</div>
+                <div class="stat-desc">Requests currently flagged high priority by the urgency detector.</div>
+            </div>
+            <div class="stat-card animate-in delay-2">
+                <div class="stat-label">Mentor Pool</div>
+                <div class="stat-value stat-value-small">2</div>
+                <div class="stat-desc">Trusted helpers with strong response history and contribution signals.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recommendations -->
+    <section class="recommendations">
+        <div class="rec-card animate-in delay-1">
+            <div class="rec-label">AI Recommendations</div>
+            <h2 class="rec-title">Requests needing attention</h2>
+
+            <div class="request-item">
+                <div class="request-item-title">Need help</div>
+                <div class="request-item-desc">AI summary: Web Development request with high urgency. Best suited for members with relevant expertise.</div>
+                <div class="request-tags">
+                    <span class="tag tag-category">Web Development</span>
+                    <span class="tag tag-urgency-high">High</span>
+                </div>
+            </div>
+
+            <div class="request-item">
+                <div class="request-item-title">Need help making my portfolio responsive before demo day</div>
+                <div class="request-item-desc">Responsive layout issue with a short deadline. Best helpers are frontend mentors comfortable with CSS grids and media queries.</div>
+                <div class="request-tags">
+                    <span class="tag tag-category">Web Development</span>
+                    <span class="tag tag-urgency-high">High</span>
+                </div>
+            </div>
+
+            <div class="request-item">
+                <div class="request-item-title">Looking for Figma feedback on a volunteer event poster</div>
+                <div class="request-item-desc">A visual design critique request where feedback on hierarchy, spacing, and messaging would create the most value.</div>
+                <div class="request-tags">
+                    <span class="tag tag-category">Design</span>
+                    <span class="tag tag-urgency-medium">Medium</span>
+                </div>
+            </div>
+
+            <div class="request-item">
+                <div class="request-item-title">Need mock interview support for internship applications</div>
+                <div class="request-item-desc">Career coaching request focused on confidence-building, behavioral answers, and entry-level frontend interviews.</div>
+                <div class="request-tags">
+                    <span class="tag tag-category">Career</span>
+                    <span class="tag tag-urgency-low">Low</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.stat-card, .rec-card, .request-item').forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = `all 0.6s ease ${index * 0.1}s`;
+            observer.observe(el);
+        });
+
+        // Counter animation
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.innerHTML = value + (element.innerHTML.includes('<br>') ? '' : '');
+                if (progress < 1) window.requestAnimationFrame(step);
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counters = entry.target.querySelectorAll('.stat-value-small');
+                    counters.forEach((counter, index) => {
+                        setTimeout(() => {
+                            animateValue(counter, 0, 2, 1000);
+                        }, index * 200);
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsGrid = document.querySelector('.stats-grid');
+        if (statsGrid) statsObserver.observe(statsGrid);
+    </script>
+</body>
+</html>
