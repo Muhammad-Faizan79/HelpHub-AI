@@ -3,95 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HelpHub AI - Messages</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style4.css">
-<base target="_blank">
+    <title>Messages - HelpHub AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <nav class="navbar">
-        <a href="#" class="logo">
-            <div class="logo-icon">H</div>
-            <span>HelpHub AI</span>
-        </a>
-        <ul class="nav-links">
-            <li><a href="./profile.html">Dashboard</a></li>
-            <li><a href="./explore.html">Explore</a></li>
-            <li><a href="./message.html" class="active">Messages</a></li>
-        </ul>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">H</div>
+                <span>HelpHub AI</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="explore.html">Explore</a></li>
+                <li><a href="messages.html" class="active">Messages</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <section class="hero animate-in">
-        <div class="hero-label">Interaction / Messaging</div>
-        <h1 class="hero-title">Keep support moving through direct communication.</h1>
-        <p class="hero-desc">Basic messaging gives helpers and requesters a clear follow-up path once a match happens.</p>
-    </section>
+    <main class="container" style="padding: 40px 0;">
+        <div class="hero-banner" style="margin-bottom: 40px;">
+            <div class="hero-label">Interaction / Messaging</div>
+            <h1 style="color: white;">Keep support moving through direct communication.</h1>
+            <p style="color: var(--text-light); margin-top: 12px;">
+                Basic messaging gives helpers and requesters a clear follow-up path once a match happens.
+            </p>
+        </div>
 
-    <div class="main-content">
-        <div class="card animate-in delay-1">
-            <div class="card-label">Conversation Stream</div>
-            <h2 class="card-title">Recent messages</h2>
-            <div class="message-list" id="messageList">
-                <div class="message-item">
-                    <div class="message-header">
-                        <span class="message-sender">Ayesha Khan &rarr; Sara Noor</span>
-                        <span class="message-time">09:45<br>AM</span>
+        <div class="two-col">
+            <div class="card">
+                <div class="card-label">Conversation Stream</div>
+                <h2 style="margin-bottom: 24px;">Recent messages</h2>
+                <div id="messageList" class="message-list" style="padding: 0;"></div>
+            </div>
+
+            <div class="card">
+                <div class="card-label">Send Message</div>
+                <h2 style="margin-bottom: 24px;">Start a conversation</h2>
+                <form id="sendMessageForm">
+                    <div class="form-group">
+                        <label class="form-label">To</label>
+                        <select class="form-select" id="messageTo">
+                            <option>Ayesha Khan</option>
+                            <option>Sara Noor</option>
+                            <option>Hassan Ali</option>
+                        </select>
                     </div>
-                    <p class="message-text">I checked your portfolio request. Share the breakpoint screenshots and I can suggest fixes.</p>
-                </div>
-                <div class="message-item">
-                    <div class="message-header">
-                        <span class="message-sender">Hassan Ali &rarr; Ayesha Khan</span>
-                        <span class="message-time">11:10<br>AM</span>
+                    <div class="form-group">
+                        <label class="form-label">Message</label>
+                        <textarea class="form-textarea" id="messageContent" placeholder="Share support details, ask for files, or suggest next steps."></textarea>
                     </div>
-                    <p class="message-text">Your event poster concept is solid. I would tighten the CTA and reduce the background texture.</p>
-                </div>
+                    <button type="submit" class="btn btn-primary w-full">Send</button>
+                </form>
             </div>
         </div>
+    </main>
 
-        <div class="card animate-in delay-2">
-            <div class="card-label">Send Message</div>
-            <h2 class="card-title">Start a<br>conversation</h2>
-            <form id="messageForm">
-                <div class="form-group">
-                    <label for="recipient">To</label>
-                    <select class="form-control" id="recipient">
-                        <option>Ayesha Khan</option>
-                        <option>Sara Noor</option>
-                        <option>Hassan Ali</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="messageText">Message</label>
-                    <textarea class="form-control" id="messageText" placeholder="Share support details, ask for files, or suggest next steps."></textarea>
-                </div>
-                <button type="submit" class="btn-send">Send</button>
-            </form>
-        </div>
-    </div>
-
-    <script>
-        document.getElementById('messageForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const recipient = document.getElementById('recipient').value;
-            const text = document.getElementById('messageText').value;
-            if (!text.trim()) return;
-            
-            const now = new Date();
-            const time = now.toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit', hour12:true}).replace(' ','<br>');
-            
-            const item = document.createElement('div');
-            item.className = 'message-item';
-            item.innerHTML = `
-                <div class="message-header">
-                    <span class="message-sender">You &rarr; ${recipient}</span>
-                    <span class="message-time">${time}</span>
-                </div>
-                <p class="message-text">${text}</p>
-            `;
-            document.getElementById('messageList').insertBefore(item, document.getElementById('messageList').firstChild);
-            document.getElementById('messageText').value = '';
-        });
-    </script>
+    <script src="js/app.js"></script>
 </body>
 </html>
